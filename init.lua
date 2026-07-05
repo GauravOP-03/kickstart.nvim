@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -431,6 +431,28 @@ require('lazy').setup({
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
+      local actions = require 'telescope.actions'
+
+      require('telescope').setup {
+        pickers = {
+          buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            mappings = {
+              i = {
+                ['<c-d>'] = actions.delete_buffer,
+              },
+            },
+          },
+        },
+
+        extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown(),
+          },
+        },
+      }
+
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -443,6 +465,8 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
+        --
+
         extensions = {
           ['ui-select'] = { require('telescope.themes').get_dropdown() },
         },
@@ -653,7 +677,7 @@ require('lazy').setup({
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
-        ts_ls = {},
+        -- ts_ls = {},
         html = {},
         cssls = {},
         tailwindcss = {},
@@ -728,7 +752,7 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-         '<leader>f',
+        '<leader>f',
         function() require('conform').format { async = true, lsp_format = 'fallback' } end,
         mode = '',
         desc = '[F]ormat buffer',
@@ -759,8 +783,8 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
-       -- 
-       sql = { 'sql_formatter' },
+        --
+        sql = { 'sql_formatter' },
       },
     },
   },
@@ -835,7 +859,7 @@ require('lazy').setup({
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
 
       sources = {

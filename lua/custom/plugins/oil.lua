@@ -3,7 +3,12 @@ return {
   'stevearc/oil.nvim',
   ---@module 'oil'
   ---@type oil.SetupOpts
-  opts = {},
+  opts = {
+    default_file_explorer = false,
+  },
+  keys = {
+    { '-', '<CMD>Oil<CR>', desc = 'Open parent directory' },
+  },
   -- Optional dependencies
   dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
